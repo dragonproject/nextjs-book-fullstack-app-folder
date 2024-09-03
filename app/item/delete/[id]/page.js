@@ -1,7 +1,8 @@
 "use client"
 import { useState, useEffect } from "react" 
 import Image from "next/image" 
-import useAuth from "../../../utils/useAuth" 
+import useAuth from "@/app/utils/useAuth"
+import {useRouter} from "next/navigation";
 
 const DeleteItem = (context) => {
     const [title, setTitle] = useState("")
@@ -11,7 +12,8 @@ const DeleteItem = (context) => {
     const [email, setEmail] = useState("")
     const [loading, setLoading] = useState(false)
 
-    const loginUserEmail = useAuth()
+    const loginUserEmail = useAuth();
+    const router = useRouter();
 
     useEffect(() => {
         const getSingleItem = async(id) => {
@@ -46,6 +48,9 @@ const DeleteItem = (context) => {
             alert(jsonData.message)           
         }catch(err){
             alert("アイテム削除失敗")  
+        }finally {
+            router.push("/");
+            router.refresh();
         }
     } 
 

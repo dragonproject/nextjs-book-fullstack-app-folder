@@ -1,28 +1,41 @@
-import { useState } from "react"
+"use client";
+import { useState } from "react";
 
 const ImgInput = (props) => {
-    const [imageFile, setImageFile ] = useState("")
+    const [imageFile, setImageFile] = useState("");
 
-    const handleClick = async() => {
-        try{
-            const data = new FormData()
-            data.append("file", imageFile)
-            data.append("upload_preset", "YYYYY")
-            data.append("cloud_name","XXXXX")
-            const response= await fetch("https://api.cloudinary.com/v1_1/XXXXX/image/upload", {method: "POST", body: data})
-            const jsonData = await response.json()
-            await props.setImage(jsonData.url)
-            alert("画像アップロード成功")
-        }catch(err){
-            alert("画像アップロード失敗")
+    const handleClick = async () => {
+        try {
+            const data = new FormData();
+            data.append("file", imageFile);
+            data.append("upload_preset", "m0djpdlm");
+            data.append("cloud_name", "de7cpxuqp");
+            const response = await fetch(
+                "https://api.cloudinary.com/v1_1/de7cpxuqp/image/upload",
+                {
+                    method: "POST",
+                    body: data,
+                }
+            );
+            const jsonData = await response.json();
+            await props.setImage(jsonData.url);
+            alert("画像アップロード成功");
+        } catch (err) {
+            alert("画像アップロード失敗");
         }
-    }
+    };
     return (
         <div className="img-input">
-            <input type="file" onChange= {(e)=> setImageFile(e.target.files[0])} accept="image/png, image/jpg"/>
-            <button onClick={handleClick} disabled={!imageFile}>画像Upload</button>
+            <input
+                type="file"
+                onChange={(e) => setImageFile(e.target.files[0])}
+                accept="image/png, image/jpg"
+            />
+            <button onClick={handleClick} disabled={!imageFile}>
+                画像Upload
+            </button>
         </div>
-    )
-}
+    );
+};
 
-export default ImgInput
+export default ImgInput;
